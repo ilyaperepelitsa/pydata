@@ -176,4 +176,18 @@ np.dot(arr.T, arr)
 arr = np.arange(16).reshape((2, 2, 4))
 arr
 arr.swapaxes(1, 2)
-'63-3322-5946-0501-9'.replace("-", "")
+
+
+
+arr = np.arange(10)
+np.sqrt(arr)
+
+np.exp(arr)
+
+
+x = np.random.randn(8)
+x
+
+pew = np.random.randn(3) * 3
+pew
+np.modf(pew)
