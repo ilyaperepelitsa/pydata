@@ -191,3 +191,152 @@ x
 pew = np.random.randn(3) * 3
 pew
 np.modf(pew)
+
+
+
+
+
+
+points = np.arange(-5, 5, 0.01)
+xs, ys = np.meshgrid(points, points)
+
+ys
+
+
+import matplotlib.pyplot as plt
+z = np.sqrt(xs ** 2 + ys ** 2)
+z
+
+
+plt.imshow(z, cmap = plt.cm.gray)
+plt.colorbar()
+plt.title("Image plot of $\sqrt{x^2 + y^2}$ for a grid of values")
+plt.show()
+
+
+
+
+### conditional logic as array operator
+
+
+xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+cond = np.array([True, False, True, True, False])
+
+
+result = [(x if c else y)
+            for x, y, c in zip(xarr, yarr, cond)]
+
+
+result
+
+### more concise version
+result = np.where(cond, xarr, yarr)
+result
+
+
+
+###
+
+arr = np.random.randn(4, 4)
+arr
+np.where(arr > 0, 2, -2)
+
+np.where(arr > 0, 2, arr) # set only positive vals to 2
+
+
+result = []
+for i in range(n):
+    if cond1[i] and cond2[i]:
+        result.append(0)
+    elif cond1[i]:
+        result.append(1)
+    elif cond2[i]:
+        result.append(2)
+    else:
+        result.append(3)
+
+# convert this BS into a nested where expression
+np.where(cond1 & cond2, 0,
+            np.where(cond1, 1,
+                        np.where(cond2, 2, 3)))
+
+
+
+arr = np.random.randn(5, 4)
+arr.mean()
+np.mean(arr)
+
+
+arr.sum()
+arr
+arr.mean(axis = 1)
+
+arr.sum(1)
+arr.sum(0)
+
+
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+arr.cumsum()
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+arr.cumsum(1)
+
+
+
+### boolean arrays
+
+arr = np.random.randn(100)
+arr
+(arr > 0).sum()
+
+
+### sorting
+
+arr = np.random.randn(8)
+arr
+arr.sort()
+arr
+
+
+arr = np.random.randn(5, 3)
+arr
+arr.sort(0)
+arr
+
+
+large_arr = np.random.randn(1000)
+large_arr.sort()
+large_arr
+
+large_arr[int(0.05 * len(large_arr))]
+
+
+
+###uniques and other
+
+names = np.array(["Bob", "Joe", "Will", "Bob", "Will", "Joe", "Joe"])
+np.unique(names)
+
+
+ints = np.array([3, 3, 3, 2, 2, 1, 1, 4, 4])
+np.unique(ints)
+
+
+sorted(set(names))
+
+### testing cross-membership
+
+values = np.array([6, 0, 0, 3, 2, 5, 6])
+np.in1d(values, [2, 3, 6])
+
+
+np.unique(values)
+np.intersect1d(values, [2, 5])
+np.union1d(values, [22, 3])
+np.in1d(values, [22, 3])
+values[np.in1d(values, [22, 3])]
+np.setdiff1d(values, [22, 3])
+
+## ekements that are in either but not in both
+np.setxor1d(values, [22, 3])
